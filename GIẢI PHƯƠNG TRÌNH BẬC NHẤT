@@ -1,0 +1,20 @@
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] args){
+        Scanner in = new Scanner(System.in);
+        int a = in.nextInt(), b= in.nextInt();
+        if(a==0 && b==0){
+            System.out.println("VSN");
+        }
+        else if(a==0 && b!=0){
+            System.out.println("VN");
+        }
+        else{
+            String res = String.format("%.2f", (float)-b/a);
+            System.out.println(res);
+        }
+
+        in.close();
+    }
+}
