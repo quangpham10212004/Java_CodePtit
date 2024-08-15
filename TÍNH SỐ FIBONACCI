@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class Main {
+
+    static long[] fib = new long[93];
+    static void init() {
+        fib[0] = 0;
+        fib[1] = 1;
+        for(int i = 2; i <= 92; ++i){
+            fib[i] = fib[i-1] + fib[i-2];
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int tc = sc.nextInt();
+        init();
+        while (tc-- > 0) {
+            int a = sc.nextInt();
+            System.out.println(fib[a]);
+        }
+    }
+}
