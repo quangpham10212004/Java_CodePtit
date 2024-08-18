@@ -1,0 +1,49 @@
+import java.util.Scanner;
+
+public class Main {
+
+    static boolean Prime(int n){
+        if(n < 2) return false;
+        for(int i = 2; i <= Math.sqrt(n);i++){
+            if(n%i==0){
+                return false;
+            }
+        } 
+        return true;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        
+        for(int tc = 1;tc <= T;++tc) {
+            int n = sc.nextInt();
+            System.out.print("Test "+tc+":" );
+            
+            if(Prime(n)==true) {
+                System.out.println(" "+n+"(1)");
+            }
+            else{
+                int m = n;
+                for(int i = 2; i <=Math.sqrt(m);i++){
+                    int cnt = 0;
+                    
+                        
+                        while(n%i==0){
+                            cnt++;
+                            n/=i;
+                        }
+                    if(cnt!=0){
+                        System.out.printf(" " + i + '(' +cnt+')');
+                    }
+                }
+                if(n!=1 ){
+                    System.out.printf(" " + n + "(1)");
+
+                }
+                System.out.println("");
+            }
+            
+        }
+    }
+}
