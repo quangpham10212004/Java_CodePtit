@@ -1,0 +1,30 @@
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.ArrayList;
+
+
+public class Main{    
+    public static void main(String[] args){
+        Scanner sc= new Scanner(System.in);
+        int n = sc.nextInt();
+        int m= sc.nextInt();
+        int[] a = new int[n];
+        int[] b= new int[m];
+        int[] ch = new int[1005];
+        for(int i = 0; i < n;i ++){
+            a[i] = sc.nextInt();
+            ch[a[i]] = 1; // danh dau so nay xh trong a
+        }
+        for(int i= 0 ; i < m;i++){
+            b[i]= sc.nextInt();
+        }
+        Arrays.sort(b);
+        for(int i= 0 ; i < m;i++){
+            if(ch[b[i]] == 1){
+                System.out.print(b[i] + " ");
+                ch[b[i]] = 2;
+            }
+        }
+        
+    }
+}
