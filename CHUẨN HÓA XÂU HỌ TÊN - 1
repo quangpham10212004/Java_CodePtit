@@ -1,0 +1,38 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int testCases = Integer.parseInt(scanner.nextLine());  // Đọc số lượng bộ test
+
+        for (int i = 0; i < testCases; i++) {
+            String input = scanner.nextLine().trim();  // Đọc xâu họ tên và loại bỏ khoảng trắng thừa ở đầu và cuối
+
+            // Chuyển về dạng chuẩn
+            String formattedName = formatName(input);
+
+            // In kết quả
+            System.out.println(formattedName);
+        }
+        
+        scanner.close();  // Đóng Scanner sau khi sử dụng xong
+    }
+
+    // Phương thức chuẩn hóa tên
+    public static String formatName(String name) {
+        String[] words = name.split("\\s+");  // Tách xâu thành các từ, bỏ qua khoảng trắng thừa
+        StringBuilder formattedName = new StringBuilder();
+
+        for (String word : words) {
+            if (!word.isEmpty()) {
+                // Viết hoa chữ cái đầu tiên và viết thường các chữ cái còn lại
+                formattedName.append(Character.toUpperCase(word.charAt(0)));
+                formattedName.append(word.substring(1).toLowerCase());
+                formattedName.append(" ");
+            }
+        }
+
+        // Loại bỏ khoảng trắng thừa ở cuối chuỗi
+        return formattedName.toString().trim();
+    }
+}
