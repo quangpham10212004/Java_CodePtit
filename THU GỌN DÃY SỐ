@@ -1,0 +1,34 @@
+
+import java.util.*;
+
+public class Main{
+
+    public static int testCase(ArrayList<Long> list){
+        boolean ok = true;
+        int n = list.size();
+        if(n== 1) return 1;
+        int i = 0;
+        while (i < list.size() - 1) {
+            if((list.get(i) + list.get(i+1))%2==0) {
+                ok = false;
+                list.remove(i);
+                list.remove(i);
+                break;
+            }
+            i++;
+        }
+        if(ok == true) return list.size();
+        return testCase(list);
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Long> list = new ArrayList<Long>();
+
+        int n = sc.nextInt();
+        for(int i = 0 ; i < n ; i ++){
+            list.add(sc.nextLong());
+        }
+        System.out.println(testCase(list));
+
+    }
+}
