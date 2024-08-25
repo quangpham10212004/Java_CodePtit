@@ -1,0 +1,33 @@
+import java.lang.*;
+import java.util.*;
+
+public class Main{
+
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        // int tc = sc.nextInt();
+        // while(tc-- > 0){
+            int n = sc.nextInt();
+            long[] a = new long[n];
+            for(int i =0 ; i < n ;i++){
+                a[i] = sc.nextLong();
+            }
+            for(int i = 0 ; i < n; i++){
+                int ind= i;
+                while(ind > 0 && a[ind] < a[ind - 1]){
+                    long tmp = a[ind];
+                    a[ind] = a[ind - 1];
+                    a[ind- 1] = tmp;
+                    ind--;
+                }
+                System.out.printf("Buoc %d: ",i);
+                for(int j =0 ;j <=i;j ++){
+                    System.out.print(a[j] + " ");
+
+                }
+                System.out.println();
+            }
+        
+    }
+}
