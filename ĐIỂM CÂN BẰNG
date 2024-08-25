@@ -1,0 +1,41 @@
+import java.lang.*;
+import java.util.*;
+
+public class Main{
+
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int tc = sc.nextInt();
+        while(tc-- > 0){
+            int n = sc.nextInt();
+            long[] a = new long[n];
+            long total = 0;
+            long[] pre = new long[n];
+            
+            for(int i =0 ; i < n ;i++){
+                a[i] = sc.nextLong();
+                if(i == 0) pre[i] = a[i];
+                else{
+                    pre[i] = pre[i-1] + a[i];
+                }
+                total += a[i];
+            }
+            int i= 1;
+            int res =0;
+            while(i < n-1){
+                if(pre[i] - a[i] ==  total - pre[i]){
+                    res= i + 1;
+                    break;
+                }
+                i++;
+            }
+            if(i!=n-1){
+                System.out.println(res);;
+            }
+            else{
+                System.out.println(-1);
+            }
+        }
+    }
+}
