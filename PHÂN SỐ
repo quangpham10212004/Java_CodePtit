@@ -1,0 +1,36 @@
+import java.util.*;
+import java.lang.*;
+
+
+
+class phanSo{
+    private long  a;
+    private long  b;
+    public phanSo(long tu, long mau){
+        a=tu;
+        b=mau;
+    }
+    public void toiGian(long m){
+        a= a/m;
+        b=b/m;
+        System.out.printf(a+"/" + b);
+    }
+    
+}
+
+              
+public class Main{
+    public static long gcd(long a, long b){
+        if(b == 0 ) return a;
+        return gcd(b,a%b);
+    }
+    
+    static Scanner sc= new Scanner(System.in);
+    public static void main(String[] args){
+        long a = sc.nextLong();
+        long b = sc.nextLong();
+        long m = gcd(a,b);
+        phanSo n = new phanSo(a,b);
+        n.toiGian(m);
+    }
+}
