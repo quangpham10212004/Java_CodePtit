@@ -1,0 +1,74 @@
+import java.util.*;
+import java.lang.*;
+
+
+class Rectangle{
+    private double width;
+    private double height;
+    private String color;
+    
+    public Rectangle(){
+        this.width = 1;
+        this.height = 1;
+    }
+    
+    public Rectangle(double dai, double rong, String mau){
+        this.width= rong;
+        this.height = dai;
+        this.color= mau;
+    }
+    
+    public double getWidth(){
+        return width;
+    }
+    
+    public void setWidth( double width){
+        this.width = width;
+    }
+    
+    public double getHeight(){
+        return height;
+    }
+    
+    public void setHeight(double h){
+        height = h;
+    }
+    
+    public String getColor(){
+        return color;
+    }
+    
+    public void setColor( String c){
+        color  = c;
+    }
+    
+    public double findArea(){
+        return width*height;
+    }
+    
+    public double findPerimeter(){
+        return (width + height)*2;
+    }
+}
+
+
+              
+public class Main{
+    static Scanner sc= new Scanner(System.in);
+    public static void main(String[] args){
+        double a = sc.nextDouble();
+        double b = sc.nextDouble();
+        String c = sc.next();
+        if(a<=0 || b <= 0 ) {
+            System.out.print("INVALID");
+        }
+        else {
+            Rectangle q = new Rectangle(a,b,c);
+            String tmp = q.getColor();
+            String color = "";
+            color+=tmp.substring(0,1).toUpperCase();
+            color+=tmp.substring(1).toLowerCase();
+            System.out.print((int)q.findPerimeter() + " " + (int)q.findArea() + " " + color);
+        }
+    }
+}
