@@ -1,0 +1,19 @@
+import java.util.*;
+import java.lang.*;
+
+
+public class Main{
+    public static void main(String[] args){
+        Scanner sc= new Scanner(System.in);
+        int tt = sc.nextInt();
+        while(tt-- >0){
+            double n = sc.nextLong();
+            double h = sc.nextLong();
+            for(double i = 1d; i<n;i++){
+                System.out.printf("%.6f ",Math.sqrt(i/n) *h);
+                
+            }
+            System.out.println();
+        }
+    }
+}
