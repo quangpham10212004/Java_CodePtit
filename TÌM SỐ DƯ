@@ -1,0 +1,50 @@
+import java.util.*;
+import java.lang.*;
+
+
+
+public class Main{
+    static Scanner sc = new Scanner(System.in);
+    static void Solve(){
+        String s = sc.next();
+        int len = s.length();
+        char temp = s.charAt(len-1);
+        int nums = temp-'0';
+        if(nums%2==0){
+            if(len == 1){
+                if(s.equals("0")||s.equals("8") || s.equals("4")){
+                    System.out.print("4\n");
+                }
+                else{
+                    System.out.print("0\n");
+                }
+            }
+            else{
+                char c = s.charAt(len-2);
+                int n = 10*(c-'0') + nums;
+                if(n%4==0){
+                    System.out.print("4\n");
+                }
+                else{
+                    System.out.print("0\n");
+                }
+            }
+        }
+        
+        else{
+            System.out.print("0\n");
+        }
+    }
+    
+    public static void main(String[] args){
+        
+        int tt= sc.nextInt();
+        sc.nextLine();
+        while(tt-- >0){
+            Solve();
+        }
+        
+        
+    }
+}
+        
