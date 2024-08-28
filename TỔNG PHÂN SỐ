@@ -1,0 +1,45 @@
+import java.util.*;
+import java.lang.*;
+
+
+class phanSo{
+    private long tu;
+    private long mau;
+    public static long toiGian(long a, long b){
+        if(b==0) return a;
+        return toiGian(b,a%b);
+    }
+    public phanSo(long a, long b)   {
+        tu = a;
+        mau = b;
+    }
+    public phanSo cong(phanSo b){
+        long a = this.tu*b.mau + this.mau*b.tu;
+        long x = this.mau*b.mau;
+        phanSo last = new phanSo(a,x);
+        return last;
+    }
+    public String Simple(){
+        long m = toiGian(tu,mau);
+        tu/=m;
+        mau/=m;
+        String last = tu+"/"+mau;
+        return last;
+    }
+    
+   
+}
+
+public class Main{
+    public static void main(String[] args){
+        Scanner sc= new Scanner(System.in);
+        long a= sc.nextLong();
+        long b = sc.nextLong();
+        phanSo n = new phanSo(a,b);
+        a= sc.nextLong();
+        b= sc.nextLong();
+        phanSo m  = new phanSo(a,b);
+        phanSo last = n.cong(m);
+        System.out.print(last.Simple());
+    }
+}
