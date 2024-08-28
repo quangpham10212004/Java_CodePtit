@@ -1,0 +1,25 @@
+import java.util.*;
+import java.lang.*;
+
+
+
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int tt = Integer.parseInt(sc.nextLine());
+        while(tt-- >0){
+            String s = sc.nextLine().trim();
+            StringBuilder tmp = new StringBuilder();
+            String[] arr = s.split("\\s+");
+            for(int i = 1; i < arr.length;i++){
+                System.out.print(arr[i].substring(0, 1).toUpperCase() + arr[i].substring(1).toLowerCase());
+                if(i!= arr.length-1){
+                    System.out.print(" ");
+                }
+            }
+            System.out.print(", " + arr[0].toUpperCase() + "\n");
+            
+        }
+    }
+}
+        
