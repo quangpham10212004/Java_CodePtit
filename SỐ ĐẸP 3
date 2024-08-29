@@ -1,0 +1,42 @@
+import java.util.*;
+
+public class Main{
+    static Scanner sc = new Scanner(System.in);
+    static boolean isPrime(int n){
+        if(n<2) return false;
+        for(int i = 2; i <= Math.sqrt(n);i++){
+            if(n%i == 0 )return false;
+        }
+        return true;
+    }
+    static boolean testCase(String str){
+        
+        int n = str.length();
+        
+        
+        for(int i =0 ; i < n/2;i++){
+            if(str.charAt(i) != str.charAt(n-i-1) || isPrime(str.charAt(i) - '0') == false ){
+                return false;
+            }
+            
+        }
+        
+        
+        return true;
+    }
+    
+    public static void main(String[] args){
+        
+        int tt = Integer.parseInt(sc.nextLine());
+        while(tt-- >0){
+            String s = sc.nextLine();
+            boolean ok = testCase(s);
+            if(ok == true){
+                System.out.print("YES\n");
+            }
+            else{
+                System.out.print("NO\n");
+            }
+        }
+    }
+}
