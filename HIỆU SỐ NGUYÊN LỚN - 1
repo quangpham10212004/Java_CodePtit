@@ -1,0 +1,24 @@
+
+import java.math.BigInteger;
+import java.util.*;
+
+public class Main{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        while (T-- > 0) {
+            BigInteger a = sc.nextBigInteger();
+            BigInteger b = sc.nextBigInteger();
+            BigInteger c = a.subtract(b).abs();
+            StringBuilder res = new StringBuilder(c.toString());
+            
+            int maxLen = Math.max(a.toString().length(), b.toString().length());
+            while(res.length() < maxLen){
+                res.insert(0, '0');
+            }
+            System.out.println(res);
+            
+        }
+    }
+    
+}
