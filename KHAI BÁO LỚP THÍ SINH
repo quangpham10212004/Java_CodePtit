@@ -1,0 +1,30 @@
+import java.util.*;
+import java.lang.*;
+
+class thiSinh{
+    private String name;
+    private String date;
+    private float s1,s2,s3;
+    thiSinh(String ten, String ngaySinh, float m1, float m2,float m3){
+        name = ten;
+        date = ngaySinh;
+        s1 = m1;
+        s2 = m2;
+        s3 = m3;
+        float last = s1+ s2+s3;
+        System.out.print(name + " "+ date + " " );
+        System.out.printf("%.1f",last);
+    }
+}
+public class Main{
+    public static void main(String[] args) {
+        Scanner sc= new Scanner(System.in);
+        String name = sc.nextLine();
+        String date = sc.nextLine();
+        float m1 = sc.nextFloat();
+        float m2= sc.nextFloat();
+        float m3 = sc.nextFloat();
+        thiSinh a = new thiSinh(name, date, m1, m2, m3);
+        
+    }
+}
