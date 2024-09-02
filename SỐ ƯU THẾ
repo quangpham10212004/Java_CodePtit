@@ -1,0 +1,37 @@
+import java.util.*;
+import java.lang.*;
+
+public class Main{
+    public static void main(String[] args) {
+        Scanner sc= new Scanner(System.in);
+        int tt = sc.nextInt();
+        while(tt-- >0){
+            boolean containLetter = false;
+            String st = sc.next();
+            int le= 0, chan =0;
+            for(int i =0 ;i < st.length();i++){
+                if(Character.isLetter(st.charAt(i)) ){
+                    containLetter = true;
+                    break;
+                }
+                if((st.charAt(i) - '0') % 2==0){
+                    chan++;
+                } 
+                else if((st.charAt(i) - '0') % 2==1 ){
+                    le++;
+                }
+            }
+            if(containLetter == true){
+                System.out.println("INVALID");
+            }
+            else{
+                if((le > chan && st.length() % 2==1) || (chan > le && st.length() % 2 == 0)){
+                    System.out.println("YES");
+                }
+                else{
+                    System.out.println("NO");
+                }
+            }
+        }
+    }
+}
