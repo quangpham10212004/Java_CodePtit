@@ -1,0 +1,40 @@
+
+import java.util.Scanner;
+import static java.lang.Math.*;
+import java.math.BigInteger;
+import java.util.*;
+
+
+public class Main {
+    
+    
+    
+     public static int Solve(String S) {
+       
+        Set<Character> uniqueCharacters = new HashSet<>();
+
+       
+        for (int i = 0; i < S.length(); i++) {
+            uniqueCharacters.add(S.charAt(i));
+        }
+
+        
+        return uniqueCharacters.size();
+    }
+    
+    public static void main(String[] args) throws Exception {
+        Scanner sc = new Scanner(System.in);
+        String st = sc.nextLine();
+        int[] dd = new int[127];
+        for (int i = 0; i < st.length(); i++) {
+            dd[st.charAt(i)]++;
+        }
+        int res = 0;
+        for (char i = 'a'; i <= 'z'; i++) {
+            if (dd[i] > 0) {
+                res++;
+            }
+        }
+        System.out.println(res);
+    }
+}
