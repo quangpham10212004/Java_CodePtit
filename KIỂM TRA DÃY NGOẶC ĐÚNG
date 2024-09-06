@@ -1,0 +1,53 @@
+import java.util.*;
+import java.lang.*;
+
+
+
+public class Main{
+    // static int count(int[]  a, int k){
+    //     int cnt = 0;
+
+    //     HashMap<Integer,Integer> m = new HashMap<>();
+    //     for(int num : a){
+    //         int ch = k - num;
+    //         if(m.containsKey(ch)){
+    //             cnt += m.get(ch);
+    //         }
+    //         m.put(num, m.getOrDefault(num, 0) + 1);
+    //     }
+        
+    //     return cnt;
+    // }
+
+
+    static boolean Solve(String s){
+        Stack<Character> st = new Stack<>();
+        for(int i = 0; i< s.length();i++){
+            char c = s.charAt(i);
+            if(c=='(' || c == '{' || c=='[') st.push(c);
+            else{
+                if(st.empty() 
+                || (c==')' && st.peek() != '(')
+                || (c==']' && st.peek() != '[')
+                || (c=='}' && st.peek() != '{'))
+                    return false;
+                st.pop();
+            }
+        }
+        return st.isEmpty();
+    }
+    public static void main(String[] args){
+        Scanner sc= new Scanner(System.in);
+        int tt = sc.nextInt();
+        sc.nextLine(); // end dong
+        while(tt-- > 0){
+            String s = sc.nextLine();
+            if(Solve(s)){
+                System.out.println("YES");
+            }
+            else{
+                System.out.println("NO");
+            }
+        }
+    }
+}
