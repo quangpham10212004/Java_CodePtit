@@ -1,0 +1,30 @@
+import java.util.*;
+import java.lang.*;
+
+
+
+public class Main{
+   
+    public static void main(String[] args) throws Exception{
+        Scanner sc= new Scanner(System.in);
+        int n = sc.nextInt();
+        int [] ad = new int[n + 1];
+        
+        for(int i =1; i < n;i ++){
+            
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            ad[a] ++;
+            ad[b]++;
+        }
+        
+        for(int i = 1; i <= n;i++){
+            if(ad[i] != 1 && ad[i] != n-1){
+                System.out.print("No");
+                return;
+            }
+        }
+        System.out.print("Yes");
+        
+    }
+}
