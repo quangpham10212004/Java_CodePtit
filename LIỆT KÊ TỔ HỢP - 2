@@ -1,0 +1,50 @@
+package cp;
+import java.util.*;
+import java.lang.*;
+
+public class CP {
+    static int[] x = new int[96];
+    
+    static int ok = 1;
+    public static void init(int k){
+        for(int i = 1;i <= k ;i++){
+            x[i] = i;
+        }
+    }
+    public static void nextGen(int n, int k){
+        int i = k;
+        while(i >=1 && x[i] == n-k+i){
+            i--;
+        }
+        if(i==0){
+            ok = 0;
+        }
+        else{
+            x[i] ++;
+            for(int j = i+1; j <=k ;j++){
+                x[j] = x[j-1] + 1;
+            }
+        }
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k =sc.nextInt();
+        init(k);
+        List<String> list = new ArrayList<String>();
+        while(ok == 1){
+            String tmp ="";
+            for(int i = 1; i<=k ;i++){
+                tmp+=String.valueOf(x[i]);
+            }
+            list.add(tmp);
+            nextGen(n,k);
+        }
+        for(String x: list){
+            System.out.print(x+" ");
+        }
+        System.out.println();
+        System.out.printf("Tong cong co "+list.size()+" to hop");
+    }
+
+}
