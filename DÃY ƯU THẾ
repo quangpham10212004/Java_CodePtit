@@ -1,0 +1,33 @@
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.ArrayList;
+
+public class A{
+    static Scanner sc= new Scanner(System.in);
+    static String ok(Integer[] a){
+        int len = a.length;
+        int le =0, chan =0;
+        for(Integer i : a){
+            if(i%2 == 1){
+                le++;
+            }
+            else{
+                chan++;
+            }
+        }
+        if((len%2==1 && le > len/2) || (len%2==0 && chan > len/2)) return "YES";
+        return "NO";
+    }
+    public static void main(String[] args) {
+        int tt = sc.nextInt();
+        sc.nextLine();
+        while(tt -- > 0){
+            String[] str= sc.nextLine().trim().split("\\s+");
+            Integer[] nums = Arrays.stream(str).map(Integer::parseInt).toArray(Integer[]::new);
+            System.out.println(ok(nums));
+        }
+
+    }
+}
+    
