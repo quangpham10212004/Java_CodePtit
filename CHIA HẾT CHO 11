@@ -1,0 +1,48 @@
+C1:
+import java.lang.*;
+import java.math.BigInteger;
+import java.util.*;
+
+public class Main {
+    static Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) {
+        
+        int tt = sc.nextInt();
+        while(tt-->0){
+            BigInteger a = sc.nextBigInteger();
+            BigInteger b = new BigInteger("11");
+            BigInteger c = a.remainder(b);
+            boolean ok  = true ? c == BigInteger.ZERO : false;
+            if(ok == true){
+                System.out.println(1);
+            }
+            else{
+                System.out.println(0);
+            }
+        }
+          
+    }
+}
+
+C2:
+import java.lang.*;
+import java.math.BigInteger;
+import java.util.*;
+
+public class Main {
+    static Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) {
+        
+        int tt= sc.nextInt();
+        sc.nextLine();
+        while(tt-- >0){
+            BigInteger a = sc.nextBigInteger();
+            BigInteger b = new BigInteger("11");
+            BigInteger c = a.remainder(b);
+            if(c == BigInteger.ZERO){
+                System.out.println(1);
+            }
+            else System.out.println(0);
+        }
+    }
+}
