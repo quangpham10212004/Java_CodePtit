@@ -1,0 +1,60 @@
+import java.util.*;
+import java.lang.*;
+// J04009
+class Point{
+    private double x;
+    private double y;
+    public Point(){
+        x=0;y=0;
+    }
+    public Point(double x, double y){
+        this.x=x;
+        this.y=y;
+    }
+    public Point(Point p){
+        this.x= p.x;
+        this.y=p.y;
+    }
+    public double getX(){
+        return x;
+    }
+    public double getY(){
+        return y;
+    }
+    public double distance(Point p2){
+        return Math.sqrt(Math.pow(x-p2.x,2) + Math.pow(y-p2.y,2));
+    }
+    static double distance(Point p1, Point p2){
+        return Math.sqrt(Math.pow(p1.x-p2.x,2) + Math.pow(p1.y-p2.y,2));
+    }
+    
+  
+    public String toString(){
+        return x+" "+y;
+    }// xem lai tai sao tu call
+}
+
+public class CP {
+	static Scanner sc= new Scanner(System.in);
+    public static void main(String[] args) {
+    	int tt = sc.nextInt();
+        while(tt-->0){
+            Point[] edge = new Point[3];
+            for(int i= 0;i <3;i++){
+                double x = sc.nextDouble();
+                double y = sc.nextDouble();
+                edge[i] = new Point(x, y);
+            }
+            double a = edge[0].distance(edge[1]);
+            double b= edge[1].distance(edge[2]);
+            double c = edge[2].distance(edge[0]);
+            if(a+b > c && c + a > b && b + c > a){
+                double S = 1 / 4f * Math.sqrt((a + b + c) * (a + b - c) * (a - b + c) * (-a + b + c));
+                System.out.printf("%.2f\n",S);
+            }
+            else{
+                System.out.println("INVALID");
+            }
+        }
+    }
+}
