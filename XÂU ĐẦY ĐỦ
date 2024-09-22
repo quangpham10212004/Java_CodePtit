@@ -1,0 +1,30 @@
+import java.lang.*;
+import java.util.*;
+
+public class CP{
+    static Scanner sc= new Scanner(System.in);
+
+    public static void main(String[] args) {
+        int tc = Integer.parseInt(sc.nextLine());
+        while(tc-->0){
+            String s = sc.nextLine();
+            
+            int k = sc.nextInt();
+            sc.nextLine();
+            HashSet<Character> set = new HashSet<>();
+            for(int i =0 ;i < s.length();i++){
+                char c = s.charAt(i);
+                set.add(c);
+            }
+            int m = s.length()-set.size();
+            int check = 26- set.size();
+            if(check <= m && check <= k){
+                System.out.println("YES");
+            }
+            else{
+                System.out.println("NO");
+            }
+            
+        }    
+    }
+}
