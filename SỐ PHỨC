@@ -1,0 +1,45 @@
+import java.lang.*;
+import java.util.*;
+
+class complex{
+    int a, b;
+    public complex(int a, int b){
+        this.a = a;
+        this.b = b;
+    }
+    public complex Mul(complex other){
+        int last_a = this.a*other.a - this.b*other.b;
+        int last_b = this.a*other.b + this.b*other.a;
+        complex last = new complex(last_a, last_b);
+        return last;
+    }
+
+    public complex Add(complex other){
+        int last_a = this.a + other.a;
+        int last_b = this.b + other.b;
+        complex last = new complex(last_a, last_b);
+        return last;
+    }
+    public String toString(){
+        if(b < 0){
+            return a+ " - "+ -b + "i";
+        }
+        return a + " + "+ b + "i";
+    }
+}
+
+public class CP{
+    static Scanner sc= new Scanner(System.in);
+    public static void main(String[] args) {
+        int tt = sc.nextInt();
+        while (tt-- > 0) {
+            complex[] ar = new complex[2];
+            for(int i =0; i <=1;i++){
+                ar[i] = new complex(sc.nextInt(), sc.nextInt());
+            }
+            complex C = (ar[0].Add(ar[1])).Mul(ar[0]);
+            complex D = (ar[0].Add(ar[1])).Mul(ar[0].Add(ar[1]));
+            System.out.println(C+", "+D);
+        }
+    }
+}
