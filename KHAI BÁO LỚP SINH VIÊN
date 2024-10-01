@@ -1,0 +1,57 @@
+import java.util.*;
+
+import java.lang.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+class Student{
+	static int NUM = 1;
+	private String id;
+	private String name;
+	private String classs;
+	private String date;
+	float gpa;
+	public Student(){
+		id = "1";
+		name ="";
+		classs = "";
+		date = "";
+		gpa =0;
+
+	}
+	public Student(String n, String c, String date, float gpa){
+		this.id = String.format("B20DCCN%03d",NUM++);
+		this.name = n;
+		this.classs = c;
+		this.date = date;
+		this.gpa = gpa; 
+	}
+	public String formatDob() {
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            Date datee = formatter.parse(date);
+            return formatter.format(datee);
+        } catch (ParseException e) {
+            System.out.println(e);
+        }
+        return "";
+    }
+
+	
+	public String toString(){
+		return id + " " + name + " " + classs + " " + formatDob() + " " + String.format("%.2f", gpa);
+	}
+}
+
+public class Main{
+	public static void main(String[] args) {
+		Scanner sc= new Scanner(System.in);
+		String name = sc.nextLine();
+		String classs = sc.nextLine();
+		String date = sc.nextLine();
+		float gpa = sc.nextFloat();
+		Student student = new Student(name,classs, date, gpa);
+		System.out.println(student);
+	}
+}
