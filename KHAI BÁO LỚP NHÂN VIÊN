@@ -1,0 +1,53 @@
+import java.util.*;
+import java.lang.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+class Employee{
+    private final String id = "00001";
+    private String name;
+    private String gender;
+    private String dateOfBirth;
+    private String address;
+    private String tax;
+    private String dateOfContract;
+    
+    public Employee(){}
+    public Employee(String name, String gender, String date1, String address, String tax, String date2){
+        this.name = name;
+        this.gender = gender;
+        this.dateOfBirth = date1;
+        this.address = address;
+        this.tax = tax;
+        this.dateOfContract = date2;
+    }
+    
+    public String formatDob(String dateOfBirth) {
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            Date datee = formatter.parse(dateOfBirth);
+            return formatter.format(datee);
+        } catch (ParseException e) {
+            System.out.println(e);
+        }
+        return "";
+    }
+    public String toString(){
+        return id+" " + name + " " + gender + " " + formatDob(dateOfBirth)+" "+address + " " + tax+" " + formatDob(dateOfContract); 
+    }
+    
+}
+
+
+public class Main{
+    public static void main(String[] args) {
+        Scanner sc= new Scanner(System.in);
+        String name = sc.nextLine();
+        String gender = sc.nextLine();
+        String date1 = sc.nextLine();
+        String addr = sc.nextLine();
+        String tax = sc.nextLine();
+        String date2 = sc.nextLine();
+        Employee em = new Employee(name, gender, date1, addr, tax,date2);
+        System.out.println(em);
+    }
+}
