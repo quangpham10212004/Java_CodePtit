@@ -1,0 +1,67 @@
+import java.util.*;
+import java.lang.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+class Point{
+    private double x ;
+    private double y;
+    public Point(){
+        
+    }
+    
+    public Point(double x, double y){
+        this.x = x;
+        this.y = y;
+        
+    }
+    
+    public Point(Point p){
+        x= p.x;
+        y= p.y;
+    }
+    public double getX(){
+        return x;
+    }
+    public double getY(){
+        return y;
+    }
+    public double distance(Point secondPoint){
+        return Math.sqrt(Math.pow(x-secondPoint.x,2) + Math.pow(y-secondPoint.y, 2));
+    }
+    
+    public static double distance(Point p1, Point p2){
+        return Math.sqrt(Math.pow(p1.x-p2.x,2) + Math.pow(p1.y-p2.y, 2));
+
+    }
+    public String toString(){
+        return x+ " " +y;
+    }
+}
+
+public class Main{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int tt = sc.nextInt();
+        while(tt-- > 0){
+          
+            Point[] list = new Point[3];
+            for(int i = 0 ;i < 3; i++){
+                double x= sc.nextDouble();
+                double y = sc.nextDouble();
+                list[i] = new Point(x,y);
+            }
+            double a = list[0].distance(list[1]);
+            double b= list[1].distance(list[2]);
+            double c = list[2].distance(list[0]);
+            if(a + b > c && b + c > a && c + a > b){
+                double S = 1/4f * Math.sqrt((a+b+c)*(a+b-c)*(b+c-a)*(c+a-b));
+                double R = a*b*c/(4f*S);
+                System.out.printf(String.format("%.3f\n",Math.PI*R*R));
+            }
+            else{
+                System.out.println("INVALID");
+            }
+        }
+    }
+}
