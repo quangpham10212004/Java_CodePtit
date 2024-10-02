@@ -1,0 +1,59 @@
+package main;
+
+import java.util.Scanner;
+
+class Employee{
+	 static	int NUM = 1;
+	 private String id;
+	 private String name;
+	 private long salary;
+	 private long numDate;
+	 private String	role;
+	 private long reward;
+	 private long extra;
+	 private long total;
+	 public Employee(String ten, long luong, long ngaycong, String chucvu){
+		 id = String.format("NV%02d", NUM++);
+		 name = ten;
+		 salary = luong*ngaycong;
+		 numDate = ngaycong;
+		 role = chucvu;
+		 if(numDate >= 22 && numDate <25) {
+			 reward = (long)(0.1*salary);
+		 }
+		 else if( numDate >= 25) {
+			 reward = (long)(0.2*salary);
+		 }
+		 if(role.equals("GD")) {
+			 extra = 250000;
+		 }
+		 else if(role.equals("PGD")) {
+			 extra = 200000;
+		 }
+		 else if(role.equals("TP")) {
+			 extra = 180000;
+		 }
+		 else {
+			 extra = 150000;
+		 }
+		 total = salary + reward + extra;
+	 }
+	 public String toString() {
+		 return id + " " + name + " " + salary + " " + reward + " " +extra + " "+total;
+	 }
+}
+
+public class jscream {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		String name = sc.nextLine();
+		long lcb = sc.nextLong();
+		long ngay = sc.nextLong();
+		sc.nextLine();
+		String role = sc.nextLine();
+		Employee em = new Employee(name,lcb,ngay,role);
+		System.out.print(em + "\n");
+		
+	}
+}
