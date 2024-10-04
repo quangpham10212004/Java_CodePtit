@@ -1,0 +1,61 @@
+package jscreamy;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
+
+class Student {
+    public static int num = 1;
+    public String id, name, classs, date;
+    public float gpa;
+
+    public Student(String name, String classs, String date, float gpa) throws ParseException {
+        this.id = String.format("B20DCCN%03d", num++);
+        this.name = formatName(name);
+        this.classs = classs;
+        this.date = formatDate(date);
+        this.gpa = gpa;
+    }
+
+    // Phương thức chuẩn hóa tên sinh viên
+    private String formatName(String name) {
+        name = name.trim().toLowerCase();
+        String[] words = name.split("\\s+");
+        StringBuilder formattedName = new StringBuilder();
+        for (String word : words) {
+            formattedName.append(Character.toUpperCase(word.charAt(0)))
+                         .append(word.substring(1)).append(" ");
+        }
+        return formattedName.toString().trim();
+    }
+
+    // Phương thức chuẩn hóa ngày sinh
+    private String formatDate(String date) throws ParseException {
+        SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date parsedDate = inputFormat.parse(date);
+        return outputFormat.format(parsedDate);
+    }
+
+    public String toString() {
+        return id + " " + name + " " + classs + " " + date + " " + String.format("%.2f", gpa);
+    }
+}
+
+public class jscreamy {
+
+    static Scanner sc = new Scanner(System.in);
+
+    public static void main(String[] args) throws ParseException {
+        int tt = sc.nextInt();
+        sc.nextLine(); // Đọc bỏ dòng trống sau số nguyên
+        while (tt-- > 0) {
+            String name = sc.nextLine();
+            String classs = sc.nextLine();
+            String date = sc.nextLine();
+            float gpa = Float.parseFloat(sc.nextLine());
+            Student st = new Student(name, classs, date, gpa);
+            System.out.println(st);
+        }
+    }
+}
