@@ -1,0 +1,59 @@
+import java.lang.*;
+import java.text.DecimalFormat;
+import java.util.*;
+
+class tuyenSinh{
+    private HashMap<String, Float> prior = new HashMap<>(); 
+    private String id;
+    private String name;
+    private float Math;
+    private float Physic;
+    private float Chemistry;
+    private String status;
+    private float priority;
+    private float totalPoint;
+    public tuyenSinh(String id, String name,float Math, float Physic, float Chem){
+        this.id = id;
+        this.name = name;
+        this.Math = Math;
+        this.Physic =Physic;
+        this.Chemistry = Chem;
+        totalPoint = Math*2 + Physic + Chemistry;
+    }
+    public String formatPoint(float s){
+        DecimalFormat df= new DecimalFormat("#.#");
+        return df.format(s);
+    }
+    public void implementation(){
+        prior.put("KV1", (float) 0.5);
+        prior.put("KV2", (float)1);
+        prior.put("KV3", (float) 2.5);
+        String ck  = id.substring(0,3);
+        priority = prior.get(ck);
+        float finalPoint = priority + totalPoint;
+        if(finalPoint < 24){
+            status ="TRUOT";
+        }
+        else {
+            status ="TRUNG TUYEN";
+        }
+    }
+
+    @Override
+    public String toString(){
+        implementation();
+        return id + " "+ name + " " + formatPoint(priority) + " " + formatPoint(totalPoint)+" " + status;
+    }
+
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc= new Scanner(System.in);
+    
+       
+        tuyenSinh stu = new tuyenSinh(sc.nextLine(),sc.nextLine() , sc.nextFloat(),sc.nextFloat(),sc.nextFloat());
+        
+        System.out.println(stu);
+    }
+}
