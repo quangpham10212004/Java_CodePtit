@@ -1,0 +1,70 @@
+
+package clone;
+import java.lang.*;
+import java.util.Scanner;
+
+import javax.crypto.spec.PBEKeySpec;
+
+class phanSo{
+    private long tu;
+    private long mau;
+    public phanSo(long tu, long mau) {
+        this.tu = tu;
+        this.mau = mau;
+    }
+
+    public void setTu(long tu) {
+        this.tu = tu;
+    }
+    public void setMau(long mau) {
+        this.mau = mau;
+    }
+    public long getTu() {
+        return tu;
+    }
+    public long getMau() {
+        return mau;
+    }
+    
+    public String toString(){
+        return tu+"/"+mau;
+    }
+    static long gcd(long a, long b){
+        if(b == 0) return a;
+        return gcd(b,a%b);
+    }
+
+    public static phanSo Optimize(phanSo a){
+        long x = a.tu;
+        long y = a.mau;
+        long gcd = gcd(x,y);
+        return new phanSo(x/gcd,y/gcd);
+    }
+
+    public phanSo plus(phanSo other ){
+        long x = tu*other.mau + mau*other.tu;
+        long y = other.mau*mau;
+        return new phanSo(x,y);
+    }
+
+    public phanSo mul(phanSo other){
+        long x = tu*other.tu;
+        long y = mau*other.mau;
+        return new phanSo(x,y);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        long tt = Integer.parselong(sc.nextLine());
+        while(tt-- >0){
+            phanSo a = new phanSo(sc.nextLong(), sc.nextLong());
+            phanSo b = new phanSo(sc.nextLong(),sc.nextLong());
+            phanSo C = (a.plus(b)).mul(a.plus(b));
+            phanSo D  = (a.mul(b)).mul(C);
+            System.out.print(phanSo.Optimize(C) +" " + phanSo.Optimize(D));
+            System.out.println();
+        }
+    }
+}
