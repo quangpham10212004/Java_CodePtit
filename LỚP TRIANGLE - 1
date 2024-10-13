@@ -1,0 +1,74 @@
+package clone;
+import java.lang.*;
+import java.text.DecimalFormat;
+import java.util.Scanner;
+
+ class Point{
+    private float x;
+    private float y;
+    public Point(float x, float y) {
+        this.x = x;
+        this.y = y;
+    }
+    public void setX(float x) {
+        this.x = x;
+    }
+    public void setY(float y) {
+        this.y = y;
+    }
+    public float getX() {
+        return x;
+    }
+    public float getY() {
+        return y;
+    }
+    public static Point nextPoint( Scanner sc){
+        return new  Point(sc.nextFloat(), sc.nextFloat());
+    }
+    public float distance(Point other){
+        return (float) Math.sqrt(Math.pow(x-other.x, 2) + Math.pow(y-other.y, 2));
+    }
+}
+
+class Triangle{
+    private Point A;
+    private Point B;
+    private Point C;
+    private float a;
+    private float b;
+    private float c;
+    public Triangle(Point a, Point b, Point c) {
+        A = a;
+        B = b;
+        C = c;
+        this.a = C.distance(B);
+        this.b = A.distance(C);
+        this.c = A.distance(B);
+    }
+    
+    public boolean valid(){
+        if(a + b > c && b + c > a && c + a > b) return true;
+        return false;
+    }
+    public String getPerimeter(){
+        DecimalFormat df = new DecimalFormat("#.###");
+        float s = a + b + c;
+        return df.format(s);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while(t-- >0){
+            Triangle a = new Triangle(Point.nextPoint(sc), Point.nextPoint(sc), Point.nextPoint(sc));
+            if(!a.valid()){
+                System.out.println("INVALID");
+            } else{
+                System.out.println(a.getPerimeter());
+            }
+        }
+    }
+    
+}
