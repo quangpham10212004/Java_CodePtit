@@ -1,0 +1,54 @@
+    package clone;
+    import java.lang.*;
+    import java.text.DecimalFormat;
+    import java.util.ArrayList;
+    import java.util.HashSet;
+    import java.util.List;
+    import java.util.Scanner;
+    import java.util.Set;
+    import java.util.TreeSet;
+
+    class WordSet{
+        private Set<String> set ;
+
+        public WordSet(String s){
+            set = new TreeSet<String>();
+            String[] list = s.toLowerCase().trim().split("\\s+");
+            for(String i : list){
+                set.add(i);
+            }
+        }
+        public  WordSet union(WordSet other){
+            WordSet temp = new WordSet("");
+            temp.set.addAll(set);
+            temp.set.addAll(other.set);
+            return temp;
+        } 
+
+        public WordSet intersection(WordSet other){
+            WordSet temp = new WordSet("");
+            temp.set.addAll(set);
+            temp.set.retainAll(other.set);
+            return temp;
+        }
+
+        public String toString(){
+            StringBuilder sb = new StringBuilder();
+            for(String i : set){
+                sb.append(i + " ");
+            }
+            return sb.toString();
+
+        }
+
+    }
+
+    public class Main {
+        public static void main(String[] args) {
+            Scanner in = new Scanner(System.in);
+            WordSet s1 = new WordSet(in.nextLine());
+            WordSet s2 = new WordSet(in.nextLine());
+            System.out.println(s1.union(s2));
+            System.out.println(s1.intersection(s2));
+        }
+    }
