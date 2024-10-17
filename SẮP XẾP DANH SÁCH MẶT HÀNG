@@ -1,0 +1,75 @@
+package clone;import java.lang.*;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeSet;
+
+/*Hãy sắp xếp danh sách các mặt hàng theo lợi nhuận giảm dần. 
+Mỗi mặt hàng gồm các thông tin: Mã mặt hàng (là một số nguyên, tự động tăng, tính từ 1); 
+Tên mặt hàng, nhóm hàng: là các xâu ký tự; Giá mua, giá bán: là các số thực (không quá 9 chữ số)
+
+Dữ liệu vào
+
+Dòng đầu chứa số mặt hàng. Mỗi mặt hàng viết trên 4 dòng: 
+Dòng 1: Tên mặt hàng. 
+Dòng 2: Nhóm hàng. 
+Dòng 3: Giá mua. 
+Dòng 4: Giá bán
+
+Kết quả: Ghi ra danh sách mặt hàng đã sắp xếp theo lợi nhuận giảm dần (lợi nhuận tính bằng giá bán trừ đi giá mua). 
+Mỗi mặt hàng viết trên một dòng gồm: mã, tên, nhóm hàng và lợi nhuận (với 2 chữ số sau dấu phẩy). 
+Các thông tin cách nhau đúng 1 khoảng trống. */
+
+class Items {
+    public static int NUM = 1;
+    private int id;
+    private String name;
+    private String type;
+    private double buyPrice;
+    private double sellPrice;
+    private double profit;
+    public Items(String name, String type, double buyPrice, double sellPrice) {
+        this.id = NUM++;
+        this.name = name;
+        this.type = type;
+        this.buyPrice = buyPrice;
+        this.sellPrice = sellPrice;
+        this.profit = this.sellPrice - this.buyPrice;
+    }
+    
+    public double getProfit() {
+        return profit;
+    }
+
+    public String toString(){
+        return id + " " + name + " " + type + " " + String.format("%.2f", profit);
+    }
+}
+
+class Comp implements Comparator <Items>{
+    public int compare(Items a, Items b){
+        return (int) -(a.getProfit()-b.getProfit());
+    }
+}
+
+public class Main {
+        public static void main(String[] args) {
+            Scanner sc = new Scanner(System.in);
+            int tt = Integer.parseInt(sc.nextLine());
+            ArrayList<Items> list = new ArrayList<>();
+            while(tt-- > 0){
+                list.add(new Items(sc.nextLine(), sc.nextLine(), sc.nextDouble(), sc.nextDouble()));
+                sc.nextLine();
+            }
+            Comp cmp = new Comp();
+            Collections.sort(list,cmp);
+            for(Items i : list){
+                System.out.println(i);
+            }
+        }
+    }
