@@ -1,0 +1,66 @@
+package clone;import java.lang.*;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeSet;
+
+class Student implements Comparable<Student>{
+    private static int num = 1;
+    private int id;
+    private String name;
+    private String date;
+    private float a1;
+    private float a2;
+    private float a3;
+    private float total;
+    public Student(String name, String date, float a1, float a2, float a3) {
+        this.id = num ++;
+        this.name = name;
+        this.date = date;
+        this.a1 = a1;
+        this.a2 = a2;
+        this.a3 = a3;
+        this.total  = this.a1 + this.a2 + this.a3;
+    }
+    public float getTotal(){
+        return total;
+    }
+    public int compareTo(Student o) {
+        if (this.total == o.total) {
+            return (this.id - o.id);
+        }
+        int nho = (int)(this.total * 10);
+        int lon = (int)(o.total*10);
+        return lon-nho;
+    }
+    @Override
+    public String toString() {
+        return  id + " " + name + " " + date + " " + total ;
+    }
+    
+}
+
+public class Main {
+        public static void main(String[] args) {
+            Scanner sc = new Scanner(System.in);
+            int tt = Integer.parseInt(sc.nextLine());
+            ArrayList<Student> list = new ArrayList<>();
+            while(tt-- >0){
+                list.add(new Student(sc.nextLine(), sc.nextLine(), sc.nextFloat(),sc.nextFloat(), sc.nextFloat()));
+                sc.nextLine();
+            }
+            Collections.sort(list);
+            float m = list.get(0).getTotal();
+
+            for(Student i : list){
+                if(i.getTotal() == m){
+                    System.out.println(i);
+                }
+                else break;
+            }
+        }
+    }
