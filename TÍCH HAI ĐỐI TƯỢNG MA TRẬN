@@ -1,0 +1,75 @@
+package clone;
+import java.lang.*;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+class Matrix{
+    private int n;
+    private int m;
+    private int[][] mt;
+    static int[][] tmp ; 
+    public Matrix(int n, int m) {
+        this.n = n;
+        this.m = m;
+        mt = new int[n][m];
+    }
+    public int getRow(){
+        return mt.length;
+    }
+    public int getCol(){
+        return mt[0].length;
+    }
+    public Matrix(int [][] a){
+        mt =a;
+    }
+    public void nextMatrix(Scanner sc){
+        for(int i = 0 ; i < n;i++){
+            for(int j = 0 ; j < m;j++){
+                mt[i][j] = sc.nextInt();
+            }
+        }
+        
+    }
+
+    
+    public Matrix mul(Matrix other){
+        tmp = new int[this.n][other.m];
+        for(int i = 0 ; i < this.n; i ++){
+            for(int j = 0;j < other.m;j++){
+                tmp[i][j] = 0;
+                for(int k = 0; k < this.m;k++){
+                    tmp[i][j] += this.mt[i][k] * other.mt[k][j];
+                }
+            }
+        }
+        Matrix res = new Matrix(tmp);
+        return res;
+    }
+    @Override
+    public String toString(){
+        String res ="";
+        for(int i =0 ; i < this.getRow();i++){
+            for(int j = 0 ; j < this.getCol();j++){
+                res+=mt[i][j] + " ";
+            }
+            res+="\n";
+        }
+        return res;
+    }
+    
+
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt(), m = sc.nextInt(), p = sc.nextInt();
+        Matrix a = new Matrix(n,m);
+        a.nextMatrix(sc);
+        Matrix b = new Matrix(m,p);
+        b.nextMatrix(sc);
+        System.out.println(a.mul(b));
+    }
+}
