@@ -1,0 +1,84 @@
+package clone;
+import java.lang.*;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeSet;
+
+/*Quán Game mùa này vắng khách nên chủ quán quyết định tính tiền chi tiết đến từng phút. 
+Dựa trên dữ liệu giờ vào và giờ ra, hãy tính thời gian chơi game của các Game thủ nhé.
+
+Input
+
+Dòng đầu của dữ liệu vào ghi số lượng game thủ trong ngày (không quá 20).
+
+Thông tin về một game thủ đến chơi game được ghi lại trên 4 dòng lần lượt là:
+
+Mã người chơi (xâu ký tự độ dài không quá 10, không có khoảng trống)
+Tên người chơi (xâu ký tự độ dài không quá 100, có thể có khoảng trống).
+Giờ vào (định dạng hh:mm)
+Giờ ra (định dạng hh:mm)
+Dữ liệu vào đảm bảo không có cặp game thủ nào có thời gian bằng nhau. 
+
+Ouput
+
+Ghi ra danh sách game thủ đã được sắp xếp theo thời gian chơi game giảm dần. */
+
+class playStat implements Comparable<playStat>{
+    private String id;
+    private String name;
+    private String in;
+    private String out;
+    private int totalTime;
+    private String totalTimeString;
+    public playStat(String id, String name, String in, String out) {
+        this.id = id;
+        this.name = name;
+        this.in = in;
+        this.out = out;
+        Time(this.in, this.out);
+    }
+    
+    public void Time(String in, String out){
+        int st = Integer.parseInt(out.substring(0,2)) - Integer.parseInt(in.substring(0,2)) ;   
+        int en = Integer.parseInt(out.substring(3)) - Integer.parseInt(in.substring(3)) ;
+        if(en < 0) {
+            en += 60;
+            st -=1;
+        }
+        totalTime = st*60 + en;
+        totalTimeString =  String.format("%d gio %d phut",st,en);
+    }
+
+    public String toString(){
+        return id + " " + name + " " + totalTimeString; 
+    }
+    @Override
+    public int compareTo( playStat b) {
+        return -(this.totalTime - b.totalTime);
+    }
+
+}
+
+public class Main {
+        public static void main(String[] args) {
+            Scanner sc = new Scanner(System.in);
+            int tt = Integer.parseInt(sc.nextLine());
+            ArrayList<playStat> list = new ArrayList<>();
+            while(tt -- >0){
+                list.add(new playStat(sc.nextLine(), sc.nextLine(), sc.nextLine(), sc.nextLine()));
+            }
+            Collections.sort(list);
+            for(playStat i : list){
+                System.out.println(i);
+            }
+        }
+    }
