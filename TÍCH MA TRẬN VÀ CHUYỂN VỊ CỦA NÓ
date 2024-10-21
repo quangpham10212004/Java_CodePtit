@@ -1,0 +1,84 @@
+package clone;
+import java.lang.*;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+class Matrix{
+    private int [][] mt;
+    public Matrix(int n, int m){
+        mt = new int[n][m];
+
+    }
+
+    public Matrix(int [][] temp){
+        mt = temp;
+    }
+
+    public int getRow(){
+        return mt.length;
+    }
+
+    public int getCol(){
+        return mt[0].length;
+    }
+
+    public void nextMatrix(Scanner sc){
+        for(int i = 0; i < this.getRow();i++){
+            for(int j = 0; j < this.getCol();j++){
+                mt[i][j] = sc.nextInt();
+            }
+        }
+    }
+
+    public Matrix trans(){
+        int[][] o = new int[this.getCol()][this.getRow()];
+        for(int j = 0; j < this.getCol();j++){
+            for(int i = 0; i < this.getRow();i++){
+                o[j][i] = this.mt[i][j];
+            }
+        }
+        Matrix other = new Matrix(o);
+        int[][] temp = new int[this.getRow()][other.getCol()];
+        
+        for(int i = 0 ; i < this.getRow();i++){
+            for(int j  = 0 ;j < other.getCol();j++){
+                temp[i][j] = 0;
+                for(int k = 0 ; k < this.getCol();k++){
+                    temp[i][j] += this.mt[i][k] * other.mt[k][j];
+                }
+            }
+        }
+        Matrix res = new Matrix(temp);
+        return res;
+    }
+
+
+    @Override
+    public String toString(){
+        String res ="";
+        for(int i =0 ; i < this.getRow();i++){
+            for(int j = 0 ; j < this.getCol();j++){
+                res+=mt[i][j] + " ";
+            }
+            res+="\n";
+        }
+        return res;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while(t -->0){
+            int n = sc.nextInt(), m = sc.nextInt();
+            Matrix a = new Matrix(n,m);
+            a.nextMatrix(sc);
+            Matrix b = a.trans();
+            System.out.println(b);
+        }
+    }
+    
+}
