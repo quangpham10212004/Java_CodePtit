@@ -1,0 +1,91 @@
+package clone;
+import java.lang.*;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+class Point{
+    private double x;
+    private double y;
+    
+    public Point(){
+        x=0;
+        y=0;
+    }
+    
+    public Point(double X, double Y){
+        this.x= X;
+        this.y=Y;
+    }
+    
+    public Point(Point c){
+        this.x = c.x;
+        this.y= c.y;
+    }
+    
+    public double getX(){
+        return x;
+    }
+    
+    public double getY(){
+        return y;
+        
+    }
+    
+    public double distance(Point secondPoint){
+        double res= Math.pow(this.getX()-secondPoint.getX(),2) + Math.pow(this.getY()-secondPoint.getY(), 2);
+        res= Math.sqrt(res);
+        
+        return res;
+        
+    }
+    
+    public double distance(Point a, Point b){
+        double res= Math.pow(a.x- b.x,2) + Math.pow(a.y-b.y,2);
+        res= Math.sqrt(res);
+        return res;
+    }
+    
+    public  String toString(){
+        return x +" " + y;
+    }
+    
+}
+
+
+public class Main {
+    static double getArea(Point A, Point B, Point C){
+        double a = B.distance(C);
+        double c = A.distance(B);
+        double b = A.distance(C);
+        if(a+b > c && c + a > b && b + c > a){
+            double S = 1 / 4f * Math.sqrt((a + b + c) * (a + b - c) * (a - b + c) * (-a + b + c));
+            return S;
+        }
+        else{
+            return 0f;
+        }
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int tt = sc.nextInt();
+        while(tt -- >0){
+            List<Point> list =new ArrayList<>();
+            int n = sc.nextInt();
+            for(int i =0 ;i < n;++i){
+                list.add(new Point(sc.nextDouble(), sc.nextDouble()));
+            }
+            double finalArea = 0f;
+            Point flag = new Point(list.get(0));
+            for(int i = 1; i < list.size()-1;i++){
+                Point a = new Point(list.get(i));
+                Point b = new Point(list.get(i+1));
+                finalArea += getArea(flag, a, b);
+
+            }
+            System.out.printf("%.3f\n",finalArea);
+        }
+    }
+    
+}
