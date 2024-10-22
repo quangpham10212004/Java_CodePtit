@@ -1,0 +1,76 @@
+package clone;
+import java.lang.*;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+/*Cửa hàng điện máy – điện lạnh cần lập hóa đơn tính tiền cho khách hàng. 
+Mỗi mặt hàng sẽ có đơn giá và một số tiền được gọi là chiết khấu trên tổng hóa đơn. 
+Số tiền phải thanh toán sẽ bằng đơn giá * số lượng sau đó trừ đi tiền chiết khấu.
+
+Hãy tính tiền cho từng hóa đơn và sắp xếp theo số tiền giảm dần.
+
+Input
+
+Dòng đầu ghi số lượng hóa đơn. Không quá 20.
+
+Mỗi thông tin hóa đơn gồm 5 dòng:
+
+Mã mặt hàng (xâu ký tự độ dài không quá 10, không có khoảng trống)
+Tên mặt hàng (xâu ký tự độ dài không quá 100, có thể có khoảng trống)
+Số lượng mua (không quá 50)
+Đơn giá (số nguyên dương có thể đến 10 chữ số)
+Tiền chiết khấu của hóa đơn (có thể đến 9 chữ số).
+
+Output
+
+Ghi ra danh sách hóa đơn đã sắp xếp, trong đó mỗi dòng gồm đầy đủ 6 thông tin: 
+mã mặt hàng, tên mặt hàng, số lượng mua, đơn giá, chiết khấu và tổng tiền. 
+Mỗi thông tin cách nhau một khoảng trống.*/
+
+class Items implements Comparable<Items>{
+    private String id;
+    private String name;
+    private long num;
+    private long price;
+    private long discount;
+    private long totalFee;
+    public Items(String id, String name, long num, long price, long discount) {
+        this.id = id;
+        this.name = name;
+        this.num = num;
+        this.price = price;
+        this.discount = discount;
+        this.totalFee = this.num * this.price - this.discount;
+    }
+
+    public String toString(){
+        return id + " " + name + " " +  num +" " + price + " " + discount + " " + totalFee;
+    }
+     
+    @Override
+    public int compareTo(Items o){
+        if(totalFee == o.totalFee) return 0;
+        if(totalFee < o.totalFee) return 1;
+        return -1;
+    }
+}
+
+public class Main {
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int tt = Integer.parseInt(sc.nextLine());
+        List<Items> list = new ArrayList<>();
+        while(tt -->0 ){
+            list.add(new Items(sc.nextLine(), sc.nextLine(),Long.parseLong(sc.nextLine()), Long.parseLong(sc.nextLine()),Long.parseLong(sc.nextLine())));
+            
+        }
+        Collections.sort(list);
+        for(Items i : list){
+            System.out.println(i);
+        }
+    }
+    
+}
