@@ -1,0 +1,90 @@
+package clone;
+import java.lang.*;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+/*Doanh nghiệp X cần tuyển một số nhân viên mới. Bài thi tuyển có hai phần: lý thuyết và thực hành. 
+Sau khi tính điểm trung bình, các thí sinh sẽ được xếp thành 4 loại:
+
+Nếu điểm dưới 5 -> TRUOT
+Nếu điểm lớn hơn 5 nhưng nhỏ hơn 8 -> CAN NHAC
+Nếu điểm từ 8 đến 9.5 -> DAT
+Nếu điểm lớn hơn 9.5 -> XUAT SAC
+Điểm các bài thi lý thuyết và thực hành đều là số thực trong phạm vi từ 0 đến 10. 
+Tuy nhiên, khi nhập điểm các bài thi, cán bộ tuyển dụng có thể quên mất dấu . 
+phân cách phần nguyên và phần thập phân. Do đó nếu điểm ghi là 78 thì cần được hiểu là 7.8. 
+Tuy nhiên, điểm 10 thì vẫn ghi là 10 (không có giá trị điểm nào bằng 1.0).
+
+Hãy sắp xếp danh sách thí sinh đã được xếp loại theo điểm trung bình giảm dần. */
+class Interview {
+    public static int NUM = 1;
+    private String id;
+    private String name;
+    private double lt;
+    private double th;
+    private double total;
+    private String status;
+    public double formatNum(double x){
+        if(x > 10)
+            return x/10f;
+        return x; 
+        
+
+    }
+    public String response(double x){
+        if(x > 9.5) return "XUAT SAC";
+        if(x >=8 ) return "DAT";
+        if(x >= 5) return "CAN NHAC";
+        return "TRUOT";
+    }
+
+    public double getTotal(){
+        return total;
+    }
+    public Interview(String name, double lt, double th) {
+        this.id  = String.format("TS%02d", NUM++);
+        this.name = name;
+        this.lt = formatNum(lt);
+        this.th = formatNum(th);
+        this.total = (this.lt + this.th)/2;
+        this.status = response(this.total);
+    }
+
+    
+    @Override
+    public String toString(){
+        return id + " " + name + " " + String.format("%.2f", total) + " "+status;
+    }
+
+
+    
+}
+
+class Comp implements Comparator<Interview>{
+    public int compare(Interview a, Interview b){
+        return -((int)(10*a.getTotal()) - (int)(10*b.getTotal()));
+    }
+}
+
+public class Main {
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int tt = sc.nextInt();
+        List<Interview> list = new ArrayList<>();
+        sc.nextLine();
+        while(tt -- >0){
+            list.add(new Interview(sc.nextLine(), sc.nextDouble(), sc.nextDouble()));
+            sc.nextLine();
+        }
+
+        Comparator cmp = new Comp();
+        Collections.sort(list,cmp);
+        for(Interview i : list){
+            System.out.println(i);
+        }
+    }
+    
+}
