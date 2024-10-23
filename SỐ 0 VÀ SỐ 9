@@ -1,0 +1,30 @@
+package clone;
+import java.lang.*;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+public class Main{
+    public static void main(String[] args) {
+        Scanner sc  = new Scanner(System.in);
+        int tc= Integer.parseInt(sc.nextLine());
+        while(tc -->0){
+            int n = sc.nextInt();
+            Queue<String> q= new LinkedList<>();
+            q.offer("9");
+            while(!q.isEmpty()){
+                String cur_num = q.poll();
+                int num = Integer.valueOf(cur_num);
+                if(num % n == 0){
+                    System.out.println(num);
+                    break;
+                }
+                q.offer(cur_num + "0");
+                q.offer(cur_num+"9");
+            }
+            
+        }
+
+    }
+}
