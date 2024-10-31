@@ -1,0 +1,84 @@
+package clone;
+import java.lang.*;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+/**
+ *  */
+class  Teacher{
+    static int num = 1;
+    private String id;
+    private String name;
+    private String code;
+    private String majorSub;
+    private float IT;
+    private float major;
+    private float totalPoint;
+    private String result;
+    private float extra;
+    public Teacher(String name, String code, float iT, float major) {
+        this.id = String.format("GV%02d", num++);
+        this.name = name;
+        this.code = code;
+        IT = iT;
+        this.major = major;
+        
+    }
+    public void AnalyzeCode(){
+        String fi  = this.code.substring(0,1);
+        String se = this.code.substring(1);
+        if(fi.equals("A")){
+            majorSub = "TOAN";
+        }
+        else if(fi.equals("B")){
+            majorSub="LY";
+        }
+        else majorSub ="HOA";
+        if(se.equals("1")) extra = 2f;
+        else if(se.equals("2")) extra = 1.5f;
+        else if(se.equals("3")) extra = 1f;
+        else extra  = 0f;
+        totalPoint = this.IT*2 + this.major + extra;
+        if(totalPoint >= 18) result = "TRUNG TUYEN";
+        else result ="LOAI";
+    }
+    public float getTotal(){
+        AnalyzeCode();
+        return totalPoint;
+    }
+    @Override
+    public String toString(){
+        AnalyzeCode();
+        return id + " " + name + " " + majorSub + " " + totalPoint + " " +result;
+    }
+
+    
+}
+
+class Comp implements Comparator<Teacher>{
+    public int compare(Teacher a, Teacher b){
+        if(a.getTotal() > b.getTotal()) return -1;
+        else if(a.getTotal() == b.getTotal()) return 0;
+        return 1;
+    }
+}
+
+public class Main{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int tt = Integer.parseInt(sc.nextLine());
+        List<Teacher> list = new ArrayList<>();
+        while(tt -->0){
+            list.add(new Teacher(sc.nextLine(), sc.nextLine(), sc.nextFloat(), sc.nextFloat()));
+            sc.nextLine();
+        }
+
+        Comparator cmp = new Comp();
+        Collections.sort(list,cmp);
+        for(Teacher i  : list){
+            System.out.println(i);
+        }
+    }
+}
