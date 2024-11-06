@@ -1,0 +1,29 @@
+package clone;
+import java.io.*;
+import java.util.*;
+import java.text.*;
+
+
+
+
+public class Main {
+
+    public static void main(String[] args) throws IOException, FileNotFoundException  {
+        File fi = new File("DATA.in");
+        Scanner sc= new Scanner(fi);
+        while(sc.hasNextLine() ){
+            String name = sc.nextLine();
+            if(name.equals("END")) break;
+            String[] words = name.toLowerCase().trim().split("\\s+");
+            StringBuilder sb = new StringBuilder("");
+            for(String i : words){
+                sb.append(i.substring(0,1).toUpperCase());
+                sb.append(i.substring(1));
+                sb.append(" ");
+               
+            }
+            System.out.println(sb.toString());
+        }        
+        
+    }        
+}       
