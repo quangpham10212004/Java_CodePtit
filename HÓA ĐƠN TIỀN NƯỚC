@@ -1,0 +1,94 @@
+code_ptit/Client.java
+package code_ptit;
+
+import java.text.DecimalFormat;
+
+public class Client implements Comparable<Client>{
+    private static int num  = 1;
+    private String clID;
+    private String name;
+    private double oldNum;
+    private double newNum;
+    private double totalNum;
+    private double extra;
+    private double totalFee;
+    private double originFee;
+    private DecimalFormat df = new DecimalFormat("#");
+    public Client(String name, double oldNum, double newNum) {
+        this.clID = String.format("KH%02d", num++);
+        this.name = name;
+        this.oldNum = oldNum;
+        this.newNum = newNum;
+    }
+    public double getTotalNum(){
+        return newNum - oldNum;
+    }
+    public void getAmount(){
+        double x = getTotalNum();
+        if(x <= 50){
+            totalFee = 100 * x*1.02;
+        }
+        else if(x >=51 && x <= 100 ){
+            totalFee = ((100 * 50) + (x-50)*150) * 1.03;
+        }
+        else {
+            totalFee = ((100*50) + (50*150) + (x-100)*200) * 1.05;
+        }
+
+    }
+    
+    public String toString(){
+        return clID +" " + name +" " + getTotalFee();
+    }
+    
+    public String getTotalFee() {
+        getAmount();
+        return df.format(totalFee);
+    }
+    @Override
+    public int compareTo(Client other){
+        long t1 = Long.parseLong(this.getTotalFee());
+        long t2= Long.parseLong(other.getTotalFee());
+        return -Long.compare(t1, t2);
+    }
+
+}
+
+code_ptit/Code_PTIT.java
+package code_ptit;
+import java.util.*;
+import java.lang.*;
+
+
+public class Code_PTIT {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Client> list = new ArrayList();
+        int n = sc.nextInt();
+        sc.nextLine();
+        while(n -->0){
+            list.add(new Client(sc.nextLine(),sc.nextDouble(),sc.nextDouble()));
+
+            sc.nextLine();
+            
+        }
+        Collections.sort(list);
+        for(Client i  : list){
+            System.out.println(i);
+        }
+    }
+    
+}
+
+code_ptit/Comp.java
+package code_ptit;
+
+import java.util.Comparator;
+
+public class Comp implements Comparator<HotelClient> {
+    public int compare(HotelClient a, HotelClient b){
+        return -Long.compare(a.getTotal(), b.getTotal());
+    }
+}
+
