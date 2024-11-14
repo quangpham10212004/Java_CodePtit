@@ -1,0 +1,80 @@
+code_ptit/Biker.java
+package code_ptit;
+
+import java.text.DecimalFormat;
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
+/**
+ *
+ * @author Quang
+ */
+public class Biker implements Comparable<Biker>{
+    private String name;
+    private String unit;
+    private String endTime;
+    private DecimalFormat df = new DecimalFormat("#");
+    public Biker(String name, String unit, String endTime) {
+        this.name = name;
+        this.unit = unit;
+        this.endTime = endTime;
+    }
+    
+    public String bikerCode(){
+        String[] loc = unit.trim().split("\\s+");
+        String[] nam= name.trim().split("\\s+");
+        String res = "";
+        for(String i : loc){
+            res+=i.substring(0,1);
+        }
+        for(String i  : nam){
+            res+=i.substring(0,1);
+        }
+        return res.toUpperCase();
+    }
+    
+    public double avgSpeed(){
+        double h = Double.parseDouble(endTime.substring(0,1)) - 6;
+        double s = Double.parseDouble(endTime.substring(2))/60;
+        return (double)120/(h+s);
+    }
+    public String toString(){
+        return bikerCode()+" "+name  + " " + unit+" " +  df.format(avgSpeed()) + " Km/h ";   
+    }
+    
+    
+    public int compareTo(Biker o){
+
+        return -Double.compare(this.avgSpeed(), o.avgSpeed());
+    }
+    
+}
+
+code_ptit/Code_PTIT.java
+package code_ptit;
+import java.util.*;
+import java.lang.*;
+
+
+public class Code_PTIT {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Biker> list = new ArrayList();
+        int n = sc.nextInt();
+        sc.nextLine();
+        while(n -->0){
+            list.add(new Biker(sc.nextLine(), sc.nextLine(), sc.nextLine()));
+            
+        }
+        Collections.sort(list);
+        for(Biker i  : list){
+            System.out.println(i);
+        }
+    }
+    
+}
+
