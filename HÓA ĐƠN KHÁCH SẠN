@@ -1,0 +1,123 @@
+code_ptit/Code_PTIT.java
+package code_ptit;
+import java.util.*;
+import java.lang.*;
+
+
+public class Code_PTIT {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<HotelClient> list = new ArrayList();
+        int n = sc.nextInt();
+        sc.nextLine();
+        while(n -->0){
+            list.add(new HotelClient(sc.nextLine(), sc.nextLine(), sc.nextLine(), sc.nextLine(),sc.nextLong()));
+            sc.nextLine();
+            
+        }
+        Comparator cmp = new Comp();
+        Collections.sort(list,cmp);
+        for(HotelClient i  : list){
+            System.out.println(i);
+        }
+    }
+    
+}
+
+code_ptit/Comp.java
+package code_ptit;
+
+import java.util.Comparator;
+
+public class Comp implements Comparator<HotelClient> {
+    public int compare(HotelClient a, HotelClient b){
+        return -Long.compare(a.getTotal(), b.getTotal());
+    }
+}
+
+code_ptit/HotelClient.java
+package code_ptit;
+
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
+public class HotelClient {
+    static int num =1;
+    private String id;
+    private String name;
+    private String roomID;
+    private String timeReceive;
+    private String timePay;
+    private long serFee;
+    private long floorFee;
+    private long total;
+    private long numsDay;
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    public HotelClient(String name, String roomID, String timeReceive, String timePay, long serFee) {
+        this.id = String.format("KH%02d", num++);
+        this.name = name;
+        this.roomID = roomID;
+        this.timeReceive = timeReceive;
+        this.timePay = timePay;
+        this.serFee = serFee;
+        this.numsDay = caculateDay();
+        this.total = this.floorch() * this.numsDay + this.serFee;
+    }
+    public String getName() {
+        return name;
+    }
+    public String getRoomID() {
+        return roomID;
+    }
+    public String getTimeReceive() {
+        return timeReceive;
+    }
+    public String getTimePay() {
+        return timePay;
+    }
+    public long getSerFee() {
+        return serFee;
+    }
+    
+    public long getTotal() {
+        return total;
+    }
+    public long caculateDay(){
+        
+        try {
+            Date start = sdf.parse(timeReceive);
+            Date end = sdf.parse(timePay);
+            long timeToMillisec = end.getTime() - start.getTime();
+            long timeToDate = timeToMillisec/(1000*60*60*24);
+            return timeToDate + 1;
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return 1;
+    }
+
+    public long floorch(){
+        char c = roomID.charAt(0);
+        if(c == '1'){
+            floorFee = 25;
+        }
+        else if(c=='2'){
+            floorFee =34;
+        }
+        else    if(c =='3') floorFee = 50;
+        else floorFee =80;
+        return floorFee;
+
+    }
+
+    public String toString(){
+        return id + " " +   name  + " " + roomID + " " + numsDay + " " + total;
+    }
+
+    
+
+}
